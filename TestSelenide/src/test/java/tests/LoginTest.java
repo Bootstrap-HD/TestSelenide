@@ -4,31 +4,28 @@ import base.TestBase;
 import org.testng.annotations.Test;
 import pages.LoginMessagePage;
 import pages.LoginPage;
+import static helpers.EnvironmentData.getEnvironmentData;
 
 public class LoginTest extends TestBase {
-
-    String email = "vata66@tut.by";
-    String password = "123456";
-    String name = "Viktar Iliukovich";
 
     @Test
     public void testAutorization() {
         LoginPage loginPage = new LoginPage();
         LoginMessagePage loginMessagePage = new LoginMessagePage();
 
-        loginPage.login(email, password);
+        loginPage.login(getEnvironmentData("Dev.email"), getEnvironmentData("Dev.password"));
 
-        loginMessagePage.validateMessage(String.format(loginMessagePage.loginSuccessMessage, name));
+        loginMessagePage.validateMessage(String.format(getEnvironmentData("Dev.loginSuccessMessage"), getEnvironmentData("Dev.name")));
     }
 
     @Test
     public void testLogOut() {
         LoginPage loginPage = new LoginPage();
-        loginPage.login(email, password);
+        loginPage.login(getEnvironmentData("Dev.email"), getEnvironmentData("Dev.password"));
         LoginMessagePage loginMessagePage = new LoginMessagePage();
 
         loginPage.logout();
 
-        loginMessagePage.validateMessage(loginMessagePage.logoutMessage);
+        loginMessagePage.validateMessage(getEnvironmentData("Dev.logoutMessage"));
     }
 }

@@ -1,15 +1,13 @@
 package pages;
 
 import base.PageBase;
-import org.openqa.selenium.By;
-
 import static com.codeborne.selenide.Selenide.$;
+import static helpers.Locators.getLocator;
 
 public class ProductPage extends PageBase {
-    public By addProductButton = By.cssSelector(".quantity [name='add_cart_product']");
 
     public void setAddProductInCart() {
-        //$(addProductButton).shouldBe(visible, Duration.ofSeconds(10)).click();
-        $(addProductButton).click();
+        //$(getLocator("ProductPage.addProductButton")).shouldBe(visible, Duration.ofSeconds(10)).click();
+        $(getLocator("ProductPage.addProductButton")).click();
     }
 }
