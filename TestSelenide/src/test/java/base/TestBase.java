@@ -1,7 +1,8 @@
 package base;
 
 import com.codeborne.selenide.Configuration;
-import org.openqa.selenium.remote.CapabilityType;
+import org.openqa.selenium.Platform;
+import org.openqa.selenium.remote.DesiredCapabilities;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 
@@ -14,11 +15,15 @@ public class TestBase {
     @BeforeMethod
     public void methodSetup() {
 
-        Configuration.browser = System.getProperty("selenide.browser", "safari");;
+        DesiredCapabilities caps = new DesiredCapabilities();
+        caps.setBrowserName(System.getProperty("selenide.browser", "safari"));
+        //caps.setVersion();
+        caps.setPlatform(Platform.valueOf(System.getProperty("platform", "MAC")));
+        caps.setAcceptInsecureCerts(true);
+        Configuration.remote = "http://172.20.10.12:4444/wd/hub";
+        Configuration.browserCapabilities = caps;
         Configuration.pageLoadTimeout = 10000;
         Configuration.timeout = 10000;
-        //Configuration.browserSize = "1920x1080";
-        Configuration.browserCapabilities.setCapability(CapabilityType.ACCEPT_INSECURE_CERTS, true);
 
         open(getEnvironmentData("Dev.url"));
         getWebDriver().manage().window().maximize();
