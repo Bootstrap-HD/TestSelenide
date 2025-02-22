@@ -16,10 +16,10 @@ public class TestBase {
     public void methodSetup() {
 
         DesiredCapabilities caps = new DesiredCapabilities();
-        caps.setBrowserName(System.getProperty("selenide.browser", "safari"));
         //caps.setVersion();
         caps.setPlatform(Platform.valueOf(System.getProperty("platform", "MAC")));
         caps.setAcceptInsecureCerts(true);
+        Configuration.browser = System.getProperty("selenide.browser", "safari");
         Configuration.remote = "http://172.20.10.12:4444/wd/hub";
         Configuration.browserCapabilities = caps;
         Configuration.pageLoadTimeout = 10000;
