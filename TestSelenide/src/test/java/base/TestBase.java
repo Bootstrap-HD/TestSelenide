@@ -20,7 +20,7 @@ public class TestBase {
         caps.setPlatform(Platform.valueOf(System.getProperty("platform", "MAC")));
         caps.setAcceptInsecureCerts(true);
         Configuration.browser = System.getProperty("selenide.browser", "safari");
-        Configuration.remote = "http://172.20.10.12:4444/wd/hub";
+        Configuration.remote = "http://10.65.162.152:4444/wd/hub";
         Configuration.browserCapabilities = caps;
         Configuration.pageLoadTimeout = 10000;
         Configuration.timeout = 10000;
